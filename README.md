@@ -56,4 +56,4 @@ EDITOR_URL=https://www.135editor.com/beautify_editor.html
 
 ## 许可证
 
-当前未附带开源许可证。公开可见不等于自动授权复制、修改或商用；如需开放复用，建议仓库维护者后续补充明确许可证。
+本项目使用 MIT License，详见 [LICENSE](LICENSE)。
