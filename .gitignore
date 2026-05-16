@@ -1,0 +1,20 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Local/private automation state
+.env
+.env.*
+*.log
+chrome-profile*/
+profiles*/
+cookies*/
+tokens*/
+
+# Local preview/build artifacts
+dist/
+build/
+node_modules/
+*.html.local
