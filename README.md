@@ -1,11 +1,12 @@
-# ZGL 公开 Skill 汇总库
+# ZGL 公开 Skill 小仓库
 
-这个仓库用来放我整理后可以公开的 Codex skills。仓库里的内容只保留通用工作流、使用边界和检查清单，不包含本机配置、账号状态、私有素材路径或未公开资料。
+这里放一些我整理后可以公开的 Codex skills 和小 helper。它们不是很“学院派”的工具说明，更像是我自己用着顺手、以后也可能继续改的小工具箱。仓库里只保留通用工作流、使用边界和检查清单，不包含本机配置、账号状态、私有素材路径或未公开资料。
 
-## 当前公开 Skills
+## 当前公开内容
 
-- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把图片、标题、表格、流程、SVG 模块等排版环节做成可检查的流程。
-- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染和 MP4 验收。
+- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把图片、标题、表格、流程、SVG 模块等排版环节做成可检查的流程。个人评价：做公众号你会用到它的。
+- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染和 MP4 验收。个人评价：可能不是你想要的“动画”，但是做动态展示效果不错。
+- [iconfont-helper](skills/iconfont-helper/)：用于从 Iconfont 搜索并保存多个 SVG 候选，方便给公众号、网页、PPT、视频和 demo UI 找好看的图标。个人评价：iconfont好东西啊。
 
 ## 安装和使用
 
@@ -16,6 +17,7 @@
 ```powershell
 Copy-Item -Recurse .\skills\wechat-135-direct "$env:USERPROFILE\.codex\skills\wechat-135-direct"
 Copy-Item -Recurse .\skills\voiced-caption-video "$env:USERPROFILE\.codex\skills\voiced-caption-video"
+Copy-Item -Recurse .\skills\iconfont-helper "$env:USERPROFILE\.codex\skills\iconfont-helper"
 ```
 
 安装后，根据自己的环境补齐浏览器、视频工具、TTS、素材目录等本地配置。不要把个人 profile、cookie、token、真实素材路径或私有草稿信息写进公开 skill。
@@ -24,6 +26,11 @@ Copy-Item -Recurse .\skills\voiced-caption-video "$env:USERPROFILE\.codex\skills
 
 ```text
 skills/
+  iconfont-helper/
+    SKILL.md
+    README.md
+    agents/
+    scripts/
   wechat-135-direct/
     SKILL.md
     README.md

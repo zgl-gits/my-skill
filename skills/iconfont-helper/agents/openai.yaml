@@ -1,0 +1,4 @@
+interface:
+  display_name: "Iconfont Helper"
+  short_description: "Search Iconfont and save multiple SVG candidates for visual selection"
+  default_prompt: "Use $iconfont-helper to search Iconfont, save multiple SVG candidates, and choose the best-looking asset for the design."
