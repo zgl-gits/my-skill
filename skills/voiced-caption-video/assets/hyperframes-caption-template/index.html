@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voiced Caption Video</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #101820;
+        color: #f6f2e8;
+        font-family: "Noto Sans SC", sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 197, 90, 0.35), transparent 28%),
+          linear-gradient(135deg, #12324a 0%, #101820 58%, #2a2118 100%);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 110px;
+      }
+
+      .card {
+        max-width: 1320px;
+        padding: 72px 86px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 42px;
+        background: rgba(8, 21, 33, 0.72);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+      }
+
+      h1 {
+        margin: 0 0 28px;
+        font-size: 86px;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      p {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.45;
+        color: rgba(246, 242, 232, 0.86);
+      }
+
+      .caption {
+        position: absolute;
+        left: 180px;
+        right: 180px;
+        bottom: 84px;
+        padding: 22px 34px;
+        border-radius: 24px;
+        background: rgba(0, 0, 0, 0.72);
+        color: #fff7df;
+        font-size: 42px;
+        line-height: 1.25;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="root" data-composition-id="voiced-caption-video" data-duration="8" data-width="1920" data-height="1080">
+      <section class="scene">
+        <div class="card">
+          <h1>视频标题</h1>
+          <p>把这里替换成第一幕画面说明。保持字幕短、清楚、可读。</p>
+        </div>
+        <div class="caption">这里放第一句配音字幕</div>
+      </section>
+    </main>
+  </body>
+</html>

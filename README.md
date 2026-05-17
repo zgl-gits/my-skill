@@ -8,6 +8,9 @@ reuse, and adapt.
 - [wechat-135-direct](skills/wechat-135-direct/) - build, revise, save, and QA
   WeChat public-account drafts in 135 Editor using durable platform-hosted
   images.
+- [voiced-caption-video](skills/voiced-caption-video/) - create short videos or
+  animation videos with planned visuals, Mandarin voiceover, burned-in captions,
+  and MP4 validation.
 
 ## Repository Layout
 
@@ -16,6 +19,12 @@ skills/
   wechat-135-direct/
     SKILL.md
     README.md
+  voiced-caption-video/
+    SKILL.md
+    README.md
+    scripts/
+    assets/
+    references/
 docs/
   publishing-checklist.md
 LICENSE

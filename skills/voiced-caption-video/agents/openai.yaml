@@ -1,0 +1,4 @@
+interface:
+  display_name: "Voiced Caption Video"
+  short_description: "Create short videos or animations with voiceover, burned-in captions, and MP4 QA"
+  default_prompt: "Use $voiced-caption-video to create a polished short video or animation with Mandarin voiceover and burned-in Chinese captions."

@@ -20,6 +20,12 @@ Use placeholders for local configuration. Do not hard-code personal paths, accou
 
 Use a dedicated browser profile for 135 work if possible. It can preserve login state locally, but the profile itself is private user data and must never be committed or shared.
 
+## Workspace Placement
+
+Keep staging and temporary work outside sync drives or shared folders unless the user explicitly asks for that destination. Local previews, extracted images, screenshots, upload intermediates, QA reports, and automation scratch files should live in a disposable project workspace. Final deliverables can go to the user-requested location.
+
+When source materials are already in a sync folder, read them in place but write temporary derivatives elsewhere. Do not move, reorganize, or delete the user's original photos, documents, or formal outputs as part of a layout job.
+
 ## Browser Control Priority
 
 For production 135 article work, prefer the dedicated browser profile and DevTools endpoint configured for this workflow. This keeps draft editing, image upload, save verification, and visual QA in the same authenticated editor context.
@@ -115,6 +121,12 @@ Use this card pattern for coordinated image styling:
 
 Keep the outer padding small, usually `6px`. Keep shadow and border subtle. Put `line-height:0;font-size:0;overflow:hidden;` on the tight image wrapper to prevent invisible nodes from creating bottom whitespace.
 
+## Subject-Protected Image Cropping
+
+When cropping, beautifying, or building photo collages, protect the image's main subject first. Preserve people, work actions, key equipment, faces, bodies, hands, tools, and critical scene details. Do not cut off a subject just to force a uniform ratio.
+
+After automatic cropping or collage export, visually review every photo. If a source photo does not fit the intended crop, change the layout instead of hard-cropping the subject. Use whitespace, a different grid, a single-image layout, or `object-fit:contain` when needed.
+
 ## Chinese Text Layout
 
 - Use real two full-width spaces `　　` at the start of Chinese body paragraphs.
@@ -143,6 +155,50 @@ Do not treat a 135 article as a Word document with images inserted between parag
 - Check title-area readability carefully. Title text, names, organization names, and theme words must have enough contrast against the background.
 - Preserve image expressiveness by using semi-transparent overlays, gradients, intentional whitespace, strokes, shadows, color blocks, offset cards, or similar treatments instead of covering artwork by default.
 - Keep copy compact. Preserve facts, but remove report-like repetition and long image explanations.
+- For display-first multi-station or multi-unit articles, curate photos instead of publishing every image. Prefer representative photos that cover different scenes, actions, and angles.
+- Remove small image captions unless the user explicitly asks for them. If context is needed, put it in surrounding body text or a designed label/card.
+- Keep cover and title-image wording short and exact. For long Chinese text, draw controlled HTML/SVG text rather than relying on generated images to render it.
+
+## Information Component Design
+
+Do not rely only on heading and paragraph styling. Before writing final HTML, scan the material for information that would read better as a designed component.
+
+Use this decision step:
+
+- If the source contains duties, checks, schedules, names, places, task lists, measurements, or status rows, consider a table-style module.
+- If the source contains before/after, problem/measure, old/new, risk/consequence, or requirement/action pairs, consider a comparison module.
+- If the source contains steps, closed-loop handling, process flow, training flow, review flow, or rectification path, consider a flow module or timeline.
+- If the source contains counts, rankings, percentages, time nodes, coverage, inspection frequency, or completion status, consider a data card or chart.
+- If the source contains key phrases, rules, reminders, or definitions, consider keyword cards, notice cards, or knowledge cards.
+
+Do not paste raw Markdown tables as-is unless the table is tiny and readable on mobile. Convert tables into mobile-friendly visual components:
+
+- Normal table -> card-style table with a colored header, row spacing, and clear cell hierarchy.
+- Wide multi-column table -> stacked grouped cards, one card per row or item.
+- Checklist -> tick-card list or two-column compact checklist.
+- Rectification list -> before/after comparison cards with clear labels.
+- Safety measures -> risk / measure / reminder triads instead of dense columns.
+- Schedule -> vertical timeline or segmented date cards.
+- Statistics -> number dashboard, progress bars, mini bar chart, or ring chart.
+
+Use real HTML tables only when the table is narrow, important, and stable in WeChat preview. For richer visuals, prefer nested `section` layouts, inline SVG, or static images generated from a chart/table design. Avoid JavaScript-dependent charts inside the final article.
+
+Quality rules:
+
+- Choose components based on the content's structure, not because every article needs every component.
+- One strong table or chart component is better than many weak decorations.
+- Keep table text short. If a cell needs a long paragraph, it should probably be a card or normal body text.
+- Match component color, border, icon, background, and title badge to the article's visual direction.
+- Preview on mobile width and check that tables do not overflow, squeeze text, or look like pasted Word/Excel.
+
+## Multi-Group Title Deduplication
+
+For articles that show multiple stations, units, people, teams, or other repeated groups, keep one clear primary title per group.
+
+- If the outer group title already shows the station, unit, person, or group name, do not repeat the same name inside image cards, collage cards, tag areas, or small labels in the same module.
+- For display-first multi-group articles, use `outer group title + image group` by default. Do not add a second title inside each image card unless the user explicitly asks.
+- Treat semantically repeated labels as duplication too. Labels such as "site scene", "work record", or similar status words are often redundant when the outer title already explains the scene.
+- If the user has already pointed out repeated titles, verify both visible HTML text and any exported image pixels/screenshots, because duplicate wording may be baked into images.
 
 ## SVG Modules and Effects
 
@@ -176,5 +232,12 @@ Before reporting completion, verify:
 - No `text-align:justify` remains in body copy.
 - Chinese body paragraphs start with real `　　` indentation.
 - Main image cards use the adjusted small-padding card style and have no bottom white slab.
+- Source material with checks, schedules, steps, comparisons, data, or lists was considered for table/card/timeline/flow/data modules instead of dense paragraphs.
+- Any table or table-like module was checked on mobile width for overflow, cramped cells, and Word/Excel-like appearance.
+- Multi-station, multi-unit, multi-person, and multi-group modules were checked for repeated names, inner labels, and duplicate titles.
+- Display-first multi-group articles used selected representative images rather than every available image by default.
+- Photo crops and collages were visually checked for subject protection. People, work actions, equipment, bodies, hands, tools, and critical details were not cut off for a forced ratio.
+- QA included visual inspection, not only text search. If labels or names are baked into exported images, inspect screenshots or image pixels for duplicate text, garbled Chinese, English remnants, or stuck-together wording.
+- Exported collage/display images were checked at the bottom and edges for ghost remnants, dirty crops, unintended blank areas, or bottom white borders.
 - The save action returned a successful response.
 - Synchronization or publishing was not clicked unless explicitly requested.
