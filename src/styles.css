@@ -182,11 +182,11 @@ p {
 }
 
 h1 {
-  max-width: 780px;
+  max-width: 720px;
   margin-bottom: 22px;
-  font-size: clamp(2.7rem, 7vw, 6.9rem);
-  line-height: 0.92;
-  letter-spacing: -0.075em;
+  font-size: clamp(2.55rem, 5.9vw, 5.45rem);
+  line-height: 1.04;
+  letter-spacing: -0.065em;
 }
 
 .hero-text {
@@ -416,7 +416,7 @@ h1 {
   background: #f5f4ec;
 }
 
-.source-strip span {
+.source-strip > span {
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 900;
@@ -424,10 +424,37 @@ h1 {
   text-transform: uppercase;
 }
 
-.source-strip a {
+.source-strip code {
   overflow-wrap: anywhere;
   color: var(--accent-strong);
+  font-size: 0.95rem;
   font-weight: 850;
+}
+
+.github-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(20, 87, 68, 0.16);
+  border-radius: 999px;
+  color: var(--accent-strong);
+  background: #ffffff;
+  font-weight: 850;
+}
+
+.github-link svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.github-link:hover,
+.github-link:focus-visible {
+  color: #ffffff;
+  background: var(--accent-strong);
+  outline: none;
 }
 
 .skill-details {
@@ -597,7 +624,7 @@ li::before {
   }
 
   h1 {
-    font-size: clamp(2.55rem, 16vw, 4.25rem);
+    font-size: clamp(2.25rem, 12vw, 3.45rem);
   }
 
   .hero-actions,
