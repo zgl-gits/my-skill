@@ -1,6 +1,6 @@
-# ZGL Lab
+# ZGL Home
 
-ZGL Lab is a small public skills library and personal workflow lab. It collects public, sanitized Codex skills that can be reused as workflow references or installed into compatible agent environments.
+This repository is a small public index for sanitized Codex skills that can be reused as workflow references or installed into compatible agent environments.
 
 The repository currently includes a React + TypeScript + Vite site and the real public skill source under `skills/`.
 

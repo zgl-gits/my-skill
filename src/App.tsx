@@ -1,11 +1,8 @@
-import { featuredSkill, labAreas, stats } from "./content";
+import { featuredSkill } from "./content";
 
 const navItems = [
   { label: "首页", href: "#home" },
-  { label: "技能", href: "#skills" },
-  { label: "笔记", href: "#notes" },
-  { label: "文章", href: "#blog" },
-  { label: "工具", href: "#tools" },
+  { label: "Skill", href: "#skill" },
 ];
 
 function GitHubIcon() {
@@ -33,20 +30,30 @@ function App() {
               {item.label}
             </a>
           ))}
+          <a
+            className="nav-github"
+            href={featuredSkill.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="在 GitHub 查看公开 skill"
+          >
+            <GitHubIcon />
+            <span>GitHub</span>
+          </a>
         </nav>
       </header>
 
       <section className="hero" id="home">
-        <div className="hero-copy">
-          <p className="section-label">公开 skill 小站</p>
-          <h1>ZGL Home 收纳可复用、可检查、已脱敏的 agent skill。</h1>
+        <div className="hero-copy" aria-labelledby="hero-title">
+          <p className="section-label">Codex Skill Index</p>
+          <h1 id="hero-title">公开、脱敏的 Codex skill 示例库。</h1>
           <p className="hero-text">
-            这里把适合公开分享的 workflow 整理成清晰的卡片和源码入口。当前先展示
-            135 编辑器相关 skill，后续可以继续放笔记、文章和小工具。
+            这里收录适合公开阅读的 skill 结构、适用边界和检查要点。页面用于快速定位源码，
+            不承载内部配置、账号状态或未发布材料。
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#skills">
-              查看技能
+            <a className="button primary" href="#skill">
+              查看 Skill
             </a>
             <a
               className="button secondary"
@@ -58,52 +65,41 @@ function App() {
             </a>
           </div>
         </div>
-
-        <aside className="hero-panel" aria-label="站点概览">
-          <div className="panel-header">
-            <span>站点索引</span>
-            <span className="status-dot">在线</span>
-          </div>
-          <div className="stat-grid">
-            {stats.map((stat) => (
-              <div className="stat-card" key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className="command-card">
-            <span className="command-prompt">源码位置</span>
-            <code>{featuredSkill.sourcePath}</code>
-          </div>
-        </aside>
       </section>
 
-      <section className="section skills-section" id="skills">
+      <section className="section skills-section" id="skill">
         <div className="section-heading">
-          <p className="section-label">公开技能</p>
-          <h2>真正的 skill 保留在源码目录里。</h2>
+          <p className="section-label">Public Skill</p>
+          <h2>索引只做导览，真实内容来自 <code>skills/</code>。</h2>
           <p>
-            页面只展示公开元信息和说明摘要，标准版本仍然放在 <code>skills/</code>
-            目录下。私有配置、登录状态和本机路径不会被放进页面。
+            每个条目只展示公开元信息、用途摘要和发布前检查点。完整 skill 文件保留在仓库目录中，
+            方便直接审阅、复制或继续维护。
           </p>
         </div>
 
-        <article className="skill-showcase">
+        <article className="skill-record" aria-label={`${featuredSkill.name} skill 条目`}>
           <div className="skill-main">
-            <div className="skill-title-row">
+            <div className="skill-title">
               <h3>{featuredSkill.name}</h3>
-              <span>{featuredSkill.status}</span>
+              <p>{featuredSkill.summary}</p>
             </div>
-            <p>{featuredSkill.summary}</p>
-            <div className="tag-row">
-              {featuredSkill.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
-            <div className="source-strip">
-              <span>标准源码</span>
-              <code>{featuredSkill.sourcePath}</code>
+
+            <dl className="meta-list" aria-label="skill 元信息">
+              <div>
+                <dt>适合对象</dt>
+                <dd>{featuredSkill.audience}</dd>
+              </div>
+              <div>
+                <dt>仓库目录</dt>
+                <dd><code>{featuredSkill.repository}</code></dd>
+              </div>
+              <div>
+                <dt>标准源码</dt>
+                <dd><code>{featuredSkill.sourcePath}</code></dd>
+              </div>
+            </dl>
+
+            <div className="link-row">
               <a
                 className="github-link"
                 href={featuredSkill.githubUrl}
@@ -112,7 +108,7 @@ function App() {
                 aria-label="在 GitHub 查看 wechat-135-direct skill"
               >
                 <GitHubIcon />
-                <span>GitHub 查看 skill 目录</span>
+                <span>GitHub 查看目录</span>
               </a>
             </div>
           </div>
@@ -136,40 +132,6 @@ function App() {
             </div>
           </div>
         </article>
-      </section>
-
-      <section className="section area-section" aria-labelledby="areas-heading">
-        <div className="section-heading compact">
-          <p className="section-label">后续空间</p>
-          <h2 id="areas-heading">先把架子留好，内容慢慢补。</h2>
-        </div>
-        <div className="area-grid">
-          {labAreas.map((area) => (
-            <article className="area-card" id={area.id} key={area.id}>
-              <div className="area-card-top">
-                <h3>{area.title}</h3>
-                <span className={area.status === "当前" ? "now" : ""}>{area.status}</span>
-              </div>
-              <p>{area.description}</p>
-              <ul>
-                {area.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section publish-note" aria-label="发布边界">
-        <div>
-          <p className="section-label">发布边界</p>
-          <h2>能公开的是方法，默认保护的是私有状态。</h2>
-        </div>
-        <p>
-          ZGL Home 的规则很简单：分享可复用的结构和检查方法，不分享个人账号、登录状态、
-          本机配置和私有素材。公开页面要方便别人看懂，也要经得起脱敏检查。
-        </p>
       </section>
     </main>
   );
