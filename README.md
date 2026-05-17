@@ -1,6 +1,6 @@
-# Public Skills
+# My Skill
 
-This repository collects public, sanitized Codex skills that can be reused as workflow references or installed into compatible agent environments.
+My public Codex skills collection. This repository collects public, sanitized Codex skills that can be reused as workflow references or installed into compatible agent environments.
 
 The repository currently includes:
 
