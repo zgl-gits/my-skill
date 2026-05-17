@@ -1,27 +1,17 @@
-# ZGL Home
+# Public Codex Skills
 
-This repository is a small public index for sanitized Codex skills that can be reused as workflow references or installed into compatible agent environments.
+This repository collects public, sanitized Codex skills that are safe to read,
+reuse, and adapt.
 
-The repository currently includes a React + TypeScript + Vite site and the real public skill source under `skills/`.
+## Skills
 
-- [`wechat-135-direct`](skills/wechat-135-direct/) - build, revise, save, and QA WeChat public-account drafts in 135 Editor using durable platform-hosted images.
-
-More public skills will be added over time. Each skill should live under `skills/<skill-name>/` and include its own `SKILL.md`.
-
-## Local Site
-
-```powershell
-npm install
-npm run dev
-npm run build
-```
+- [wechat-135-direct](skills/wechat-135-direct/) - build, revise, save, and QA
+  WeChat public-account drafts in 135 Editor using durable platform-hosted
+  images.
 
 ## Repository Layout
 
 ```text
-src/
-index.html
-package.json
 skills/
   wechat-135-direct/
     SKILL.md
@@ -33,9 +23,12 @@ LICENSE
 
 ## Publishing Rule
 
-Only publish content that has been reviewed for public release. Do not commit machine-specific paths, tokens, cookies, browser profiles, private endpoints, private drafts, or private source materials.
+Only publish content that has been reviewed for public release. Do not commit
+machine-specific paths, tokens, cookies, browser profiles, private endpoints,
+private drafts, or private source materials.
 
-Before adding or updating a public skill, run through the [publishing checklist](docs/publishing-checklist.md).
+Before adding or updating a public skill, run through the
+[publishing checklist](docs/publishing-checklist.md).
 
 ## License
 
