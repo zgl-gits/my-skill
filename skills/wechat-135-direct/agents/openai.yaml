@@ -1,4 +1,4 @@
 interface:
-  display_name: "Wechat 135 Direct"
+  display_name: "WeChat 135 Direct"
   short_description: "Build and QA 135 Editor WeChat drafts with durable platform-hosted images"
   default_prompt: "Use $wechat-135-direct to build or revise a 135 Editor WeChat article with durable platform-hosted images."

@@ -1,6 +1,6 @@
 ---
 name: wechat-135-direct
-description: Directly build, revise, and save WeChat public-account drafts in 135 Editor using a controlled browser session and durable platform-hosted images.
+description: Directly build, revise, and save WeChat public-account drafts in 135 Editor using a controlled browser session and durable platform-hosted images. Use when the user asks for 135 Editor / 公众号排版, direct editing of 135 drafts, fixing broken images, inserting local work photos into 135, or saving a styled article without relying on localhost/file/base64 image URLs.
 ---
 
 # Wechat 135 Direct
@@ -11,7 +11,7 @@ Use this skill to create 135 Editor drafts that remain valid after local tools a
 
 ## Configuration
 
-Use placeholders for local configuration. Do not hard-code personal paths, account details, cookies, tokens, article IDs, or private material locations in this skill.
+Use placeholders for local configuration. Do not hard-code personal paths, account details, cookies, tokens, article IDs, private material locations, browser profile paths, or local debugging ports in this public skill.
 
 - Start script: `<PATH_TO_135_CHROME_START_SCRIPT>`
 - Chrome profile: `<YOUR_CHROME_PROFILE>`
@@ -54,24 +54,25 @@ Local HTML can be used to design, inspect, and stage a fragment, but final image
 
 1. Start or reuse the configured dedicated browser profile for 135 editing.
 2. Connect to the configured DevTools endpoint and locate the 135 editor page.
-3. Open or create the target 135 article through the native 135 article workflow.
-4. Verify the target before editing by checking title, visible content markers, and article ID when available.
-5. Write the article HTML directly into the 135 editor iframe. Do not rely on a local preview page as final state.
-6. Insert each image through 135's own paste, upload, or material-library path.
-7. Save with the editor's quick-save action.
-8. Verify the saved editor state and the save response.
-9. Close saved articles that are no longer being edited so the editor does not hit its simultaneous-open article limit.
+3. Clear ordinary blocking UI such as ads, activity popups, guide layers, and non-essential overlays when they clearly block editing and are not login, permission, save, sync, publish, billing, or security dialogs.
+4. Open or create the target 135 article through the native 135 article workflow.
+5. Verify the target before editing by checking title, visible content markers, and article ID when available.
+6. Write the article HTML directly into the 135 editor iframe. Do not rely on a local preview page as final state.
+7. Insert each image through 135's own paste, upload, or material-library path.
+8. Save with the editor's quick-save action.
+9. Verify the saved editor state and the save response.
+10. Close saved articles that are no longer being edited so the editor does not hit its simultaneous-open article limit.
 
 Do not click synchronization, publishing, or account-binding actions unless the user explicitly asks for them.
 
 ## Safe Article Switching Workflow
 
-Before opening another article or starting a new one, decide whether the currently open editor content is a draft created or edited in the current work session, or only stale browser-restored cache from an earlier session.
+Before opening another article or starting a new one, decide whether the currently open editor content is a draft created or edited in the current work session, or only stale browser-restored cache from an earlier session. Browser-restored cache is not automatically the authoritative saved draft.
 
 Important distinction:
 
 - If the article was created or intentionally edited in the current work session, save it before switching or closing.
-- If 135 is opened for the first time in the current work session and shows a leftover article from an earlier period, treat it as browser-restored cache. Do not quick-save that restored content by default.
+- If 135 is opened for the first time in the current work session and shows a leftover article from an earlier period, treat it as browser-restored cache. Do not quick-save that restored content by default because doing so can overwrite an already-good saved article.
 - When only one restored-cache article is open and the editor will not allow closing it, create a new blank article first, then close the stale editor card if the UI allows.
 
 Use this order:
@@ -80,10 +81,11 @@ Use this order:
 2. Decide whether the current article is a current-session draft or stale restored cache.
 3. For a current-session draft, save and confirm a successful save response.
 4. For stale restored cache, do not save it; create or switch to a new blank article first if needed.
-5. Create new articles through 135's native new-article entry or the editor's own article manager API when appropriate.
+5. Create new articles through 135's native new-article entry or the editor's own article manager API when appropriate. Do not manually clear the old article body as a substitute for creating a new article.
 6. Confirm the new draft is separate from the old one by checking title, body marker, and article ID when available.
-7. After the current article is saved and no longer being edited, close its open editor tab/card.
-8. Closing an open editor tab/card is not deleting the saved article. Never delete a draft unless the user explicitly asks for deletion.
+7. When opening an old article, verify article ID, title, and body marker immediately after the switch.
+8. After the current article is saved and no longer being edited, close its open editor tab/card.
+9. Closing an open editor tab/card is not deleting the saved article. Never delete a draft unless the user explicitly asks for deletion.
 
 ## 135 DOM Notes
 
@@ -144,14 +146,10 @@ Do not treat a 135 article as a Word document with images inserted between parag
 - Redesign the layout around the current article. Keep the stable workflow, but make the body structure, title area, image placement, colors, and module rhythm serve the current theme.
 - Use an intentional full-page background or atmosphere layer instead of a plain white document shell.
 - Use generated images when they help the article read better, such as covers, atmosphere images, column headers, section openers, diagrams, and abstract visual explanations.
-- Keep the boundary clear: never use generated images to fake real on-site photos or make an activity look documented when it was not. For real events, work scenes, people, equipment, and source material, prefer the user's real photos whenever available.
+- Keep the boundary clear: never use generated images to fake real on-site photos or make an activity look documented when it was not.
 - Give the article a column identity with a framed cover area, short lead card, numbered section headers, tag pills, dividers, quote boxes, keyword boxes, and a closing card.
-- Use chapter badges such as `01` / `02` / `03` when they help create rhythm. Pair each chapter with a decorated subtitle and one clear content role.
-- Add one short keyword card near the lead when helpful. This helps mobile readers grasp the theme before the article becomes text-heavy.
 - Vary section patterns. Avoid repeating the same title block and the same single-image card for every section.
 - For multiple related photos, use designed image groups such as side-by-side cards, staggered pairs, before/after comparison modules, process strips, or grid collages.
-- Coordinate uploaded-image handling with the article structure. Decide each image's narrative position, size, crop, card treatment, and relationship with the background and text.
-- Crop and beautify images when appropriate with fixed-height wrappers, `object-fit:cover`, rounded corners, subtle shadows, borders, and labels.
 - Check title-area readability carefully. Title text, names, organization names, and theme words must have enough contrast against the background.
 - Preserve image expressiveness by using semi-transparent overlays, gradients, intentional whitespace, strokes, shadows, color blocks, offset cards, or similar treatments instead of covering artwork by default.
 - Keep copy compact. Preserve facts, but remove report-like repetition and long image explanations.
@@ -200,11 +198,11 @@ For articles that show multiple stations, units, people, teams, or other repeate
 - Treat semantically repeated labels as duplication too. Labels such as "site scene", "work record", or similar status words are often redundant when the outer title already explains the scene.
 - If the user has already pointed out repeated titles, verify both visible HTML text and any exported image pixels/screenshots, because duplicate wording may be baked into images.
 
-## SVG Modules and Effects
+## SVG Modules And Effects
 
 SVG can be used for decoration, structure, and light interaction if compatible with 135/WeChat.
 
-- Decorative uses: rail-line dividers, shield or warning icons, dashed process lines, corner stickers, small arrows, tag pills, and light geometric accents.
+- Decorative uses: dividers, shield or warning icons, dashed process lines, corner stickers, small arrows, tag pills, and light geometric accents.
 - Structural uses: reusable inline SVG modules for timelines, process maps, cards, layered image/text compositions, before/after comparison frames, and topic-specific opening screens.
 - Light interaction or pseudo-interaction ideas: swipe-like display, long-press hint panels, layered text-over-image reveals, process motion, and before/after comparison.
 - Prefer pure inline SVG, CSS animation, simple inline structure, and carefully tested SMIL.
@@ -217,6 +215,7 @@ SVG can be used for decoration, structure, and light interaction if compatible w
 - Browser-launch authorization, if agreed by the user, applies only to the configured 135 editing workflow. It does not authorize unrelated browser automation, profile changes, extension repair, or arbitrary browsing sessions.
 - Uploading real local photos into 135 is file transmission. If the user has not clearly asked to upload or modify 135, confirm before doing it.
 - Do not upload sensitive data or files unless the user explicitly asked for that specific upload.
+- It is OK to automatically close ordinary 135 ads, promotions, activity popups, overlay masks, and guide layers that block editing, uploading, or saving. If uncertain, pause and ask the user instead of dismissing it.
 - Do not clear or overwrite an uncertain article. First verify the title and article identity.
 - Preserve user assets and existing drafts. When unsure, create a draft copy or ask before destructive replacement.
 - Keep the dedicated browser profile private. Do not commit profile data, cookies, tokens, or logged-in state.
@@ -225,6 +224,7 @@ SVG can be used for decoration, structure, and light interaction if compatible w
 
 Before reporting completion, verify:
 
+- Staging and temporary artifacts were written to a non-sync/disposable workspace, except for final deliverables or user-explicit paths.
 - No final article image `src` contains `localhost`, `127.0.0.1`, or `file://`.
 - Main images use 135/WeChat platform-hosted URLs and each loaded image has `naturalWidth > 0`.
 - No temporary upload area remains.
@@ -236,7 +236,7 @@ Before reporting completion, verify:
 - Any table or table-like module was checked on mobile width for overflow, cramped cells, and Word/Excel-like appearance.
 - Multi-station, multi-unit, multi-person, and multi-group modules were checked for repeated names, inner labels, and duplicate titles.
 - Display-first multi-group articles used selected representative images rather than every available image by default.
-- Photo crops and collages were visually checked for subject protection. People, work actions, equipment, bodies, hands, tools, and critical details were not cut off for a forced ratio.
+- Photo crops and collages were visually checked for subject protection.
 - QA included visual inspection, not only text search. If labels or names are baked into exported images, inspect screenshots or image pixels for duplicate text, garbled Chinese, English remnants, or stuck-together wording.
 - Exported collage/display images were checked at the bottom and edges for ghost remnants, dirty crops, unintended blank areas, or bottom white borders.
 - The save action returned a successful response.

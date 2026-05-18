@@ -4,8 +4,8 @@
 
 ## 当前公开内容
 
-- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把图片、标题、表格、流程、SVG 模块等排版环节做成可检查的流程。个人评价：做公众号你会用到它的。
-- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染和 MP4 验收。个人评价：可能不是你想要的“动画”，但是做动态展示效果不错。
+- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把图片、标题、表格、流程、SVG 模块、多组标题去重、草稿切换和视觉验收做成可检查的流程。个人评价：做公众号你会用到它的。
+- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染、帧检查和 MP4 验收；安全教育类视频会额外检查内容准确性、图标选择和音画同步。个人评价：可能不是你想要的“动画”，但是做动态展示效果不错。
 - [iconfont-helper](skills/iconfont-helper/)：用于从 Iconfont 搜索并保存多个 SVG 候选，方便给公众号、网页、PPT、视频和 demo UI 找好看的图标。个人评价：iconfont好东西啊。
 
 ## 安装和使用
