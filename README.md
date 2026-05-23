@@ -1,31 +1,113 @@
-# ZGL 公开 Skill 小仓库
+# ZGL Public Skills
 
-这里放一些我整理后可以公开的 Codex skills 和小 helper。它们不是很“学院派”的工具说明，更像是我自己用着顺手、以后也可能继续改的小工具箱。仓库里只保留通用工作流、使用边界和检查清单，不包含本机配置、账号状态、私有素材路径或未公开资料。
+[English](#english) | [中文](#中文)
 
-## 当前公开内容
+## English
 
-- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把图片、标题、表格、流程、SVG 模块、多组标题去重、草稿切换和视觉验收做成可检查的流程。个人评价：做公众号你会用到它的。
-- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染、帧检查和 MP4 验收；安全教育类视频会额外检查内容准确性、图标选择和音画同步。个人评价：可能不是你想要的“动画”，但是做动态展示效果不错。
-- [iconfont-helper](skills/iconfont-helper/)：用于从 Iconfont 搜索并保存多个 SVG 候选，方便给公众号、网页、PPT、视频和 demo UI 找好看的图标。个人评价：iconfont好东西啊。
+This repository collects public Codex skills and small helpers that I have cleaned up for reuse. They are not meant to be overly academic tool manuals; they are practical workflows and scripts that have been useful in real tasks.
 
-## 安装和使用
+The repository only keeps reusable workflows, boundaries, scripts, templates, and checklists. It must not contain private machine configuration, account state, private materials, browser profiles, tokens, cookies, local sessions, or unpublished work.
 
-如果只是参考，可以直接阅读每个 skill 目录下的 `SKILL.md` 和 `README.md`。
+## Published Skills
 
-如果要安装到自己的 Codex 环境，可以把需要的目录复制到本机 skills 目录，例如：
+- [codex-session-repair](skills/codex-session-repair/): Diagnoses and repairs local Codex Desktop / CLI session JSONL files when old threads fail to resume or compact because of `context_length_exceeded`, invalid historical `image_url` entries, huge `compacted` records, inline image/base64 payloads, or oversized tool outputs. It backs up first, generates a sanitized candidate by default, and only applies changes with explicit `-Apply`.
+- [wechat-135-direct](skills/wechat-135-direct/): Builds and checks 135 Editor / WeChat public-account drafts. It focuses on durable platform-hosted images, safe draft switching, article saving, and QA that prevents `localhost`, `file://`, or `data:image` resources from becoming final delivery.
+- [voiced-caption-video](skills/voiced-caption-video/): Creates voiced and captioned videos, animated explainers, image videos, and training/promo clips. It emphasizes storyboard-first production, voice, burned subtitles, rendering, frame checks, and MP4 validation.
+- [iconfont-helper](skills/iconfont-helper/): Searches Iconfont for multiple SVG candidates and saves them for visual selection, so design work does not depend on the first search result.
+
+## Install
+
+You can read each skill directly under `skills/<skill-name>/`.
+
+To install a skill into a local Codex environment, copy the desired directory into your local Codex skills folder:
 
 ```powershell
+Copy-Item -Recurse .\skills\codex-session-repair "$env:USERPROFILE\.codex\skills\codex-session-repair"
 Copy-Item -Recurse .\skills\wechat-135-direct "$env:USERPROFILE\.codex\skills\wechat-135-direct"
 Copy-Item -Recurse .\skills\voiced-caption-video "$env:USERPROFILE\.codex\skills\voiced-caption-video"
 Copy-Item -Recurse .\skills\iconfont-helper "$env:USERPROFILE\.codex\skills\iconfont-helper"
 ```
 
-安装后，根据自己的环境补齐浏览器、视频工具、TTS、素材目录等本地配置。不要把个人 profile、cookie、token、真实素材路径或私有草稿信息写进公开 skill。
+After installation, configure any required local tools yourself. Do not publish personal profiles, cookies, tokens, real material paths, local session files, or private draft information.
+
+## Repository Layout
+
+```text
+skills/
+  codex-session-repair/
+    SKILL.md
+    README.md
+    agents/
+    scripts/
+  iconfont-helper/
+    SKILL.md
+    README.md
+    agents/
+    scripts/
+  wechat-135-direct/
+    SKILL.md
+    README.md
+    agents/
+  voiced-caption-video/
+    SKILL.md
+    README.md
+    agents/
+    assets/
+    references/
+    scripts/
+docs/
+  publishing-checklist.md
+LICENSE
+README.md
+```
+
+## Publishing Rules
+
+Run the [publishing checklist](docs/publishing-checklist.md) before publishing updates.
+
+- Publish only reusable and sanitized workflows, scripts, templates, and notes.
+- Do not publish `.system` skills, plugin caches, credentials, browser profiles, logs, Codex sessions, private configs, account data, cookies, tokens, or API keys.
+- Replace machine-specific paths and private values with placeholders.
+- If a skill depends on an external platform or local toolchain, document the configuration pattern instead of publishing personal settings.
+- Commit meaningful updates only.
+
+## 中文
+
+这个仓库用来放我整理后可以公开复用的 Codex skills 和小 helper。它们不是很“学院派”的工具说明，更像是我自己用着顺手、以后也可能继续改的小工具箱。
+
+仓库里只保留可复用的工作流、使用边界、脚本、模板和检查清单。不包含本机配置、账号状态、私有素材路径、浏览器 profile、token、cookie、本地 sessions 或未公开资料。
+
+## 当前公开内容
+
+- [codex-session-repair](skills/codex-session-repair/)：用于诊断和修复本地 Codex Desktop / CLI session JSONL。适合处理旧线程因为 `context_length_exceeded`、非法历史 `image_url`、过大的 `compacted`、内联图片/base64 或超大工具输出而无法恢复/压缩的问题。默认先备份并生成候选文件，只有显式加 `-Apply` 才覆盖原文件。
+- [wechat-135-direct](skills/wechat-135-direct/)：用于 135 编辑器公众号排版、图片平台化、草稿保存和发布前 QA。重点是避免把 `localhost`、`file://`、`data:image` 等临时资源当成最终交付，并把草稿切换、保存和视觉验收做成可检查流程。
+- [voiced-caption-video](skills/voiced-caption-video/)：用于制作带配音和字幕的短视频、动画视频、图片视频或宣传/教育类视频。重点是先做分镜，再完成画面、配音、字幕烧录、渲染、帧检查和 MP4 验收。
+- [iconfont-helper](skills/iconfont-helper/)：用于从 Iconfont 搜索并保存多个 SVG 候选，方便给公众号、网页、PPT、视频和 demo UI 找好看的图标。
+
+## 安装和使用
+
+如果只是参考，可以直接阅读每个 skill 目录下的 `SKILL.md` 和 `README.md`。
+
+如果要安装到自己的 Codex 环境，可以把需要的目录复制到本机 skills 目录：
+
+```powershell
+Copy-Item -Recurse .\skills\codex-session-repair "$env:USERPROFILE\.codex\skills\codex-session-repair"
+Copy-Item -Recurse .\skills\wechat-135-direct "$env:USERPROFILE\.codex\skills\wechat-135-direct"
+Copy-Item -Recurse .\skills\voiced-caption-video "$env:USERPROFILE\.codex\skills\voiced-caption-video"
+Copy-Item -Recurse .\skills\iconfont-helper "$env:USERPROFILE\.codex\skills\iconfont-helper"
+```
+
+安装后，根据自己的环境补齐需要的浏览器、视频工具、TTS、素材目录等本地配置。不要把个人 profile、cookie、token、真实素材路径、本地 session 或私有草稿信息写进公开 skill。
 
 ## 目录结构
 
 ```text
 skills/
+  codex-session-repair/
+    SKILL.md
+    README.md
+    agents/
+    scripts/
   iconfont-helper/
     SKILL.md
     README.md
@@ -60,4 +142,4 @@ README.md
 
 ## License
 
-本仓库使用 MIT License，详见 [LICENSE](LICENSE)。
+This repository uses the MIT License. See [LICENSE](LICENSE).
